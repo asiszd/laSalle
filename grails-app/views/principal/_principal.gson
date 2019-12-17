@@ -13,7 +13,7 @@ json {
 	contra principal.contra
 	nivel principal.nivelAca
 	especialidad principal.especialidad
-	matricual principal.matricula
+	matricula principal.matricula
 	semestre principal.semestre
 
 }

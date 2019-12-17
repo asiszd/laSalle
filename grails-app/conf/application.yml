@@ -85,22 +85,22 @@ dataSource:
     jmxExport: true
     driverClassName: 'com.mysql.jdbc.Driver'
     username: root
-    password: 'password'
+    password: ''
 
 environments:
     development:
         dataSource:
 
             dbCreate: update
-            url: jdbc:mysql://127.0.0.1:3306/LaSalle
+            url: jdbc:mysql://127.0.0.1:3306/Alumnos
     test:
         dataSource:
             dbCreate: update
-            url: jdbc:mysql://127.0.0.1:3306/LaSalle
+            url: jdbc:mysql://127.0.0.1:3306/Alumnos
     production:
         dataSource:
             dbCreate: none
-            url: jdbc:mysql://127.0.0.1:3306/LaSalle
+            url: jdbc:mysql://127.0.0.1:3306/Alumnos
             properties:
                 jmxEnabled: true
                 initialSize: 5

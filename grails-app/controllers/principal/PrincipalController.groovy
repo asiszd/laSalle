@@ -12,7 +12,7 @@ class PrincipalController extends RestfulController {
     }
 
     def pending(){
-        respond Principal.findAllByMatricula(params.matri), view: 'index'
+        respond Principal.findAllByMatricula(11230004)
     }
 
     def login () {

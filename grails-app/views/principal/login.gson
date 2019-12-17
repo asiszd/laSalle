@@ -10,9 +10,10 @@ json {
     id principal.id
     nombre principal.nombreC
     correo principal.correo
+    contra principal.contra
     nivel principal.nivelAca
     especialidad principal.especialidad
-    matricual principal.matricula
+    matricula principal.matricula
     semestre principal.semestre
 
 }
