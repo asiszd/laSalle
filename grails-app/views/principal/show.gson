@@ -1,0 +1,9 @@
+
+
+import lasalle.Principal
+
+model {
+	Principal principal
+}
+
+json tmpl.principal(principal)

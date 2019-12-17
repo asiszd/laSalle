@@ -1,0 +1,18 @@
+
+import lasalle.Principal
+
+model {
+    Principal principal
+}
+
+json {
+    hal.links(principal)
+    id principal.id
+    nombre principal.nombreC
+    correo principal.correo
+    nivel principal.nivelAca
+    especialidad principal.especialidad
+    matricual principal.matricula
+    semestre principal.semestre
+
+}

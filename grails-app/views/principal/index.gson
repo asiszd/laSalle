@@ -1,0 +1,9 @@
+
+import lasalle.Principal
+
+model {
+	Iterable<Principal> principalList
+}
+
+json tmpl.principal(principalList ?: [])
+
