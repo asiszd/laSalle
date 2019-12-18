@@ -1,3 +1,4 @@
+
 <!--<table>
     <tbody>
     <tr ng-repeat="t in vm.principales | filter:{nombre:vm.usuario}:true">
@@ -13,7 +14,7 @@
     </tr>
     </tbody>
 </table>-->
-<div ng-repeat="t in vm.principales | filter:{nombre:vm.usuario}:true">
+<div ng-if=vm.isShow>
     <div class="card blue-grey darken-4 white-text">
         <div class="card-content white-text card-small">
             <div class="row">
@@ -39,18 +40,18 @@
                 </div>
             </div>
 
-           <div class="row">
+            <div class="row">
                 <div class="input-field col s12">
                     <input disabled id ="nivAca" type="text" ng-model="t.nivel">
                     <label class="active" for="nivAca">Nivel Academico</label>
                 </div>
             </div>
 
-         <!--    <div class="row">
-                <label>Nivel Academico</label>
-                <select class="browser-default" ng-model="t.nivel" ng-options="x.text for x in vm.nivel"></select>
-                <input  type="hidden" ng-model="t.nivel" name="minivel" ng-value="t.nivel"/>
-            </div>-->
+            <!--    <div class="row">
+                   <label>Nivel Academico</label>
+                   <select class="browser-default" ng-model="t.nivel" ng-options="x.text for x in vm.nivel"></select>
+                   <input  type="hidden" ng-model="t.nivel" name="minivel" ng-value="t.nivel"/>
+               </div>-->
 
             <div class="row">
                 <div class="input-field col s12">
@@ -68,10 +69,9 @@
 
             <div class="row">
                 <div class="input-field col s12">
-                    <button class="btn waves-effect waves-light col s12" type="button" ng-click="vm.update(t)">Actualizar</button>
+                    <button class="btn waves-effect waves-light col s12" type="button" ng-click="vm.save(t)">Guardar</button>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
-</div>
 </div>

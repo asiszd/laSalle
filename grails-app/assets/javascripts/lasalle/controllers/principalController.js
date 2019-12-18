@@ -24,6 +24,7 @@ function PrincipalController(Principal, $http, $filter,$window) {
     vm.authenticated = false;
     vm.user = {};
     vm.valor = "";
+    vm.isShow = false;
 
     vm.nivel = [{"text":"Bachillerato"}, {"text":"Licenciatura"}, {"text":"Maestria"}, {"text":"Doctorado"}];
     vm.filteredItems = [];
@@ -67,4 +68,8 @@ function PrincipalController(Principal, $http, $filter,$window) {
         console.log(principal);
         principal.$update();
     };
+
+    vm.toggleDisplay = function() {
+        vm.isShow = !vm.isShow;
+    }
 }

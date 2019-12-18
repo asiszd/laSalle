@@ -68,6 +68,9 @@
             <div ng-switch-when="false">
                 <div ng-include="'/lasalle/login.html'"></div>
             </div>
+            <div ng-switch-when="false">
+                <div ng-include="'/lasalle/new.html'"></div>
+            </div>
         </div>
 
     </section>
