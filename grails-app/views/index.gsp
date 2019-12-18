@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+    <asset:stylesheet href="materialize/css/materialize.min.css"/>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -41,6 +40,18 @@
         -o-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
     }
+    .input-field input[type=text] {
+        color: white;
+    }
+    .input-field input[type=text]:disabled {
+        color: #969696;
+    }
+    .input-field input[type=text]:disabled +label{
+        color: #787878;
+    }
+    .card-small {
+        width: 400px;
+    }
     </style>
 
 </head>
@@ -61,7 +72,7 @@
 
     </section>
 </div>
+    <asset:javascript src="materialize/js/materialize.min.js"></asset:javascript>
     <asset:javascript src="/lasalle/app.js" />
-
 </body>
 </html>

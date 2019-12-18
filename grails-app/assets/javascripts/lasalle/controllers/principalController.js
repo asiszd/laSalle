@@ -23,7 +23,9 @@ function PrincipalController(Principal, $http, $filter,$window) {
 
     vm.authenticated = false;
     vm.user = {};
+    vm.valor = "";
 
+    vm.nivel = [{"text":"Bachillerato"}, {"text":"Licenciatura"}, {"text":"Maestria"}, {"text":"Doctorado"}];
     vm.filteredItems = [];
     vm.principales = [];
     //vm.principales = Principal.list();
@@ -39,16 +41,12 @@ function PrincipalController(Principal, $http, $filter,$window) {
             vm.authenticated = true;
             $window.sessionStorage.token = response.data.access_token;
             vm.principales = Principal.list();
-            vm.filteredItems = $filter('filter')(vm.principales, {"nombre":"asis"}, true );
-            console.log(vm.filteredItems);
+            vm.usuario = response.data.username.toString();
+            //vm.filteredItems = $filter('filter')(vm.principales, {"nombre":"asis"}, true );
+            //console.log(vm.filteredItems);
             console.log("-----------------------------------------------------------");
             console.log(vm.principales);
         });
-    };
-
-
-    vm.filtroMatricula =function(criteria) {
-
     };
 
     vm.save = function() {
@@ -66,6 +64,7 @@ function PrincipalController(Principal, $http, $filter,$window) {
     };
 
     vm.update = function(principal) {
+        console.log(principal);
         principal.$update();
     };
 }
