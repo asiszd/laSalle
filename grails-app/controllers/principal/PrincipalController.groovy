@@ -1,10 +1,12 @@
 package principal
 
-
+import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.*
 import grails.converters.*
 import lasalle.Principal
+import grails.plugin.springsecurity.annotation.Secured
 
+@Secured(['ROLE_ADMIN'])
 class PrincipalController extends RestfulController {
     static responseFormats = ['json', 'xml']
     PrincipalController() {

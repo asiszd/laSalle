@@ -6,7 +6,7 @@ angular
 
 function Principal($resource) {
     var Principal = $resource(
-        "principales/:id",
+        "api/principales/:id",
         {"id": "@id"},
         {"update": {method: "PUT"}, "list": {method: "GET", isArray: true}}
     );

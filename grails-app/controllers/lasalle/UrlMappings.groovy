@@ -3,6 +3,9 @@ package lasalle
 class UrlMappings {
 
     static mappings = {
+
+        "/api/principales"(resources:"principal")
+
         delete "/$controller/$id(.$format)?"(action:"delete")
         get "/$controller(.$format)?"(action:"index")
         get "/$controller/$id(.$format)?"(action:"show")

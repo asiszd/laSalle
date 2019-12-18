@@ -2,14 +2,43 @@
 
 angular
     .module("lasalle")
+    .factory('authInterceptor', function ($rootScope, $window) {
+        return {
+            request: function (config) {
+                config.headers = config.headers || {};
+                if ($window.sessionStorage.token) {
+                    config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+                }
+                return config;
+            }
+        };
+    })
+    .config(function ($httpProvider) {
+        $httpProvider.interceptors.push('authInterceptor');
+    })
     .controller("PrincipalController", PrincipalController);
 
-function PrincipalController(Principal) {
+function PrincipalController(Principal, $http, $window) {
     var vm = this;
 
-    vm.principales = Principal.list();
+    vm.authenticated = false;
+    vm.user = {};
+
+    vm.principales = [];
+    //vm.principales = Principal.list();
 
     vm.newPrincipal = new Principal();
+
+    vm.login = function() {
+        $http.post('/api/login', {
+            username: vm.user.username,
+            password: vm.user.password
+        }).then(function(response) {
+            vm.authenticated = true;
+            $window.sessionStorage.token = response.data.accessToken;
+            vm.principales = Principal.list();
+        });
+    };
 
     vm.save = function() {
         vm.newPrincipal.$save({}, function() {

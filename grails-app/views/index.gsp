@@ -6,55 +6,62 @@
     <title>Welcome to Grails</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <style type="text/css">
-        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-            display: none !important;
-        }
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+    html,
+    body {
+        height: 100%;
+    }
+    html {
+        display: table;
+        margin: auto;
+    }
+    body {
+        display: table-cell;
+        vertical-align: middle;
+        background: #4ECDC4;
+    }
+
+    #login-page {
+        width: 500px;
+    }
+
+    .card {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -moz-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
     </style>
 
-    <asset:stylesheet src="application.css"/>
-
-    <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
-
-    <script type="text/javascript">
-        window.contextPath = "${request.contextPath}";
-    </script>
 </head>
-
 <body ng-app="lasalle" ng-controller="PrincipalController as vm">
-
-
-
 <div id="content" role="main">
     <section class="row colset-2-its">
 
         <!-- Our code will be here -->
 
-
-        <div class="form">
-            <input type="text" ng-model="vm.newPrincipal.matricula" />
-            <button type="button" ng-click="vm.save()">add</button>
+        <div ng-switch="vm.authenticated">
+            <div ng-switch-when="true">
+                <div ng-include="'/lasalle/list.html'"></div>
+            </div>
+            <div ng-switch-when="false">
+                <div ng-include="'/lasalle/login.html'"></div>
+            </div>
         </div>
-        <br>
-        <br>
-
-        <div ng-include="'/lasalle/list.html'"></div>
-
-
 
     </section>
 </div>
-
-
-
-<div ui-view></div>
-
-    <div class="footer" role="contentinfo"></div>
-
-    <div id="spinner" class="spinner" style="display:none;">
-        <g:message code="spinner.alt" default="Loading&hellip;"/>
-    </div>
-
     <asset:javascript src="/lasalle/app.js" />
+
 </body>
 </html>
