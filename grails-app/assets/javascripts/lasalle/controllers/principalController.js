@@ -18,14 +18,16 @@ angular
     })
     .controller("PrincipalController", PrincipalController);
 
-function PrincipalController(Principal, $http, $window) {
+function PrincipalController(Principal, $http, $filter,$window) {
     var vm = this;
 
     vm.authenticated = false;
     vm.user = {};
 
+    vm.filteredItems = [];
     vm.principales = [];
     //vm.principales = Principal.list();
+    var baseURL = 'localhost:8080/';
 
     vm.newPrincipal = new Principal();
 
@@ -35,9 +37,18 @@ function PrincipalController(Principal, $http, $window) {
             password: vm.user.password
         }).then(function(response) {
             vm.authenticated = true;
-            $window.sessionStorage.token = response.data.accessToken;
+            $window.sessionStorage.token = response.data.access_token;
             vm.principales = Principal.list();
+            vm.filteredItems = $filter('filter')(vm.principales, {"nombre":"asis"}, true );
+            console.log(vm.filteredItems);
+            console.log("-----------------------------------------------------------");
+            console.log(vm.principales);
         });
+    };
+
+
+    vm.filtroMatricula =function(criteria) {
+
     };
 
     vm.save = function() {
