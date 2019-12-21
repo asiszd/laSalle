@@ -64,7 +64,7 @@ function PrincipalController(Principal, $http, $filter,$window) {
     vm.newPrincipal = new Principal();
 
     vm.login = function() {
-        $http.post('/api/login', {
+        $http.post('/api/principales/login', {
             username: vm.user.username,
             password: vm.user.password
         }).then(function(response) {
@@ -80,10 +80,11 @@ function PrincipalController(Principal, $http, $filter,$window) {
     };
 
     vm.save = function() {
-        console.log(vm.newPrincipal)
         vm.newPrincipal.$save({}, function() {
+            var backup = vm.newPrincipal;
             vm.principales.push(angular.copy(vm.newPrincipal));
             vm.newPrincipal = new Principal();
+            $http.post('api/mail?correo='+backup.correo+'&matricula='+backup.matricula+'&pass='+backup.contra)
         });
     };
 

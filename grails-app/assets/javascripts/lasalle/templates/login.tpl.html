@@ -1,36 +1,37 @@
-
-<div id="login-page" class="row">
-    <div class="card blue-grey darken-4">
-        <div class="card-content white-text">
-            <div class="row">
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">mail_outline</i>
-                    <input id="username" type="text" name="username" ng-model="vm.user.username">
-                    <label for="username">Usuario</label>
+<form>
+    <div id="login-page" class="row">
+        <div class="card blue-grey darken-4">
+            <div class="card-content white-text">
+                <div class="row">
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">lock_outline</i>
-                    <input id="password" type="password" name="password" ng-model="vm.user.password">
-                    <label for="password">Contraseña</label>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">mail_outline</i>
+                        <input id="username" type="number" name="username" ng-model="vm.user.username" required class="validate white-text" min="1"  step="1" onkeypress="if(this.value.length==10) return false;">
+                        <label for="username" data-error="Por favor ingrese un usuario valido">Usuario</label>
+                    </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="input-field col s12">
-                    <button class="btn waves-effect waves-light col s12" type="button" ng-click="vm.login()">Login</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <button class="btn waves-effect waves-light col s12" type="button" ng-click="vm.toggleDisplay()">Registrarse</button>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">lock_outline</i>
+                        <input id="password" type="password" name="password" ng-model="vm.user.password" class="validate white-text" >
+                        <label for="password" data-error="Por favor ingrese su contraseña">Contraseña</label>
+                    </div>
                 </div>
 
-            </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <button class="btn waves-effect waves-light col s12" type="button" ng-click="vm.login()">Login</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <button class="btn waves-effect waves-light col s12" type="button" ng-click="vm.toggleDisplay()">Registrarse</button>
+                    </div>
 
-        </form>
+                </div>
+
+            </form>
+        </div>
     </div>
-</div>
+</form>

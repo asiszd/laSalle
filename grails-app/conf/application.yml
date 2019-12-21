@@ -69,7 +69,18 @@ grails:
         defaultScope: singleton
     converters:
         encoding: UTF-8
-
+---
+grails :
+    mail :
+        host : "smtp.gmail.com"
+        port : 465
+        username : "throwawayPrueba@gmail.com"
+        password : "pass12345678"
+        props :
+            mail.smtp.auth : "true"
+            mail.smtp.socketFactory.port : '465'
+            mail.smtp.socketFactory.class : "javax.net.ssl.SSLSocketFactory"
+            mail.smtp.socketFactory.fallback : "false"
 ---
 grails:
     cors:
@@ -85,22 +96,22 @@ dataSource:
     jmxExport: true
     driverClassName: 'com.mysql.jdbc.Driver'
     username: root
-    password: ''
+    password: 'password'
 
 environments:
     development:
         dataSource:
 
             dbCreate: update
-            url: jdbc:mysql://127.0.0.1:3306/Alumnos
+            url: jdbc:mysql://127.0.0.1:3306/LaSalle
     test:
         dataSource:
             dbCreate: update
-            url: jdbc:mysql://127.0.0.1:3306/Alumnos
+            url: jdbc:mysql://127.0.0.1:3306/LaSalle
     production:
         dataSource:
             dbCreate: none
-            url: jdbc:mysql://127.0.0.1:3306/Alumnos
+            url: jdbc:mysql://127.0.0.1:3306/LaSalle
             properties:
                 jmxEnabled: true
                 initialSize: 5

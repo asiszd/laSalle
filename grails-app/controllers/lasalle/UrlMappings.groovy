@@ -5,6 +5,9 @@ class UrlMappings {
     static mappings = {
 
         "/api/principales"(resources:"principal")
+        "/api/mail"(controller: 'Principal', action: 'sendEmail')
+        "/api/principales/login"(controller: 'Principal', action: 'login')
+
 
         delete "/$controller/$id(.$format)?"(action:"delete")
         get "/$controller(.$format)?"(action:"index")
@@ -18,6 +21,6 @@ class UrlMappings {
         "404"(view: '/notFound')
         "/principales"(resources:"principal")
         "/pendingPrincipal"(controller: 'Principal', action: 'pending')
-        "/Login"(controller: 'Principal', action: 'login')
+
     }
 }

@@ -1,12 +1,11 @@
 package principal
 
-import grails.plugin.springsecurity.annotation.Secured
+//import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.*
 import grails.converters.*
 import lasalle.Principal
-import grails.plugin.springsecurity.annotation.Secured
+//import grails.plugin.springsecurity.annotation.Secured
 
-@Secured(['ROLE_ADMIN'])
 class PrincipalController extends RestfulController {
     static responseFormats = ['json', 'xml']
     PrincipalController() {
@@ -19,7 +18,7 @@ class PrincipalController extends RestfulController {
 
     def login () {
         if (params.usuario == null || params.pass == null || params.usuario == '' || params.pass == ''){
-            println("NO HAY VARIABLES")
+            respond false;
         } else {
             def query = Principal.where {
                 (matricula == params.usuario && contra == params.pass)
@@ -29,14 +28,26 @@ class PrincipalController extends RestfulController {
                 //respond b, view: 'index'
                 println(b)
                 println("EL USUARIO "+ params.usuario + " HA INGRESADO AL SISTEMA")
-                def a = b.matricula
-                redirect (controller: 'Principal', action:'pending', params: [matri: b.matricula])
+                respond true;
             } else {
-                respond b, view: 'index'
-                print("NO EXISTE EL USUARIO")
+                respond false;
             }
         }
 
+    }
+
+    def mailService
+
+    def sendEmail() {
+
+        mailService.sendMail {
+            to params.correo.toString()
+            subject "Bienvenido al sistema de alumnos"
+            body 'Hola! \r' +
+            'Bienvenido al sistema de alumnos.\r' +
+            'Tu Usuario es: '+ params.matricula.toString() + '\r'+
+            'y tu contraseña es: '+params.pass.toString()
+        }
     }
 
 
