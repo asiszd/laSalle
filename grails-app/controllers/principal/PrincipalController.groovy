@@ -4,6 +4,8 @@ package principal
 import grails.rest.*
 import grails.converters.*
 import lasalle.Principal
+import org.grails.web.json.JSONObject
+
 //import grails.plugin.springsecurity.annotation.Secured
 
 class PrincipalController extends RestfulController {
@@ -16,9 +18,9 @@ class PrincipalController extends RestfulController {
         respond Principal.findAllByMatricula(11230004)
     }
 
-    def login () {
+    def loginn () {
         if (params.usuario == null || params.pass == null || params.usuario == '' || params.pass == ''){
-            respond false;
+            respond valor: false, responseFormats;
         } else {
             def query = Principal.where {
                 (matricula == params.usuario && contra == params.pass)
@@ -28,9 +30,9 @@ class PrincipalController extends RestfulController {
                 //respond b, view: 'index'
                 println(b)
                 println("EL USUARIO "+ params.usuario + " HA INGRESADO AL SISTEMA")
-                respond true;
+                respond valor: true, responseFormats;
             } else {
-                respond false;
+                respond valor: false, responseFormats;
             }
         }
 

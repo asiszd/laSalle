@@ -38,24 +38,24 @@ function PrincipalController(Principal, $http, $filter,$window) {
     }, {
         "nivel":"Licenciatura",
         "especialidades":[{
-            "name": "Ingeniería de Software y Sistemas Computacionales",
-            "name": "Educación",
-            "name": "Negocios Internacionales",
-            "name": "Arquitectura",
-            "name": "Psicología"
+            "name": "Ingeniería de Software y Sistemas Computacionales"},
+            {"name": "Educación"},
+            {"name": "Negocios Internacionales"},
+            {"name": "Arquitectura"},
+            {"name": "Psicología"
         }]
     }, {
         "nivel": "Maestría",
         "especialidades": [{
-            "name": "Tecnologías de la Información Empresarial",
-            "name": "Educación y Docencia",
-            "name": "Investigación Educativa"
+            "name": "Tecnologías de la Información Empresarial"},
+            {"name": "Educación y Docencia"},
+            {"name": "Investigación Educativa"
         }]
     }, {
         "nivel": "Doctorado",
         "especialidades": [{
-            "name": "Doctorado en Derecho",
-            "name": "Doctorado en Educación"
+            "name": "Doctorado en Derecho"},
+            {"name": "Doctorado en Educación"
         }]
     }];
     //vm.principales = Principal.list();
@@ -64,19 +64,16 @@ function PrincipalController(Principal, $http, $filter,$window) {
     vm.newPrincipal = new Principal();
 
     vm.login = function() {
-        $http.post('/api/principales/login', {
-            username: vm.user.username,
-            password: vm.user.password
-        }).then(function(response) {
-            vm.authenticated = true;
-            $window.sessionStorage.token = response.data.access_token;
-            vm.principales = Principal.list();
-            vm.usuario = response.data.username.toString();
-            //vm.filteredItems = $filter('filter')(vm.principales, {"nombre":"asis"}, true );
-            //console.log(vm.filteredItems);
+        vm.filteredItems = Principal.list();
+        var princi = $filter('filter')(vm.filteredItems, {"nombre":"asis"});
+
+            console.log(vm.filteredItems)
+            vm.usuario = vm.user.username;
+                //vm.filteredItems = $filter('filter')(vm.principales, {"nombre":"asis"}, true );
+                //console.log(vm.filteredItems);
             console.log("-----------------------------------------------------------");
-            console.log(vm.principales);
-        });
+            console.log(princi);
+
     };
 
     vm.save = function() {
@@ -106,6 +103,7 @@ function PrincipalController(Principal, $http, $filter,$window) {
 
     vm.getEspecialidades = function (selectedNivel) {
         var filtroEspe = $filter('filter')(vm.niveles, selectedNivel);
+        console.log(filtroEspe[0].especialidades)
         return filtroEspe[0].especialidades;
     }
 

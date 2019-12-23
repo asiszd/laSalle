@@ -13,7 +13,12 @@
     </tr>
     </tbody>
 </table>-->
-<div ng-repeat="t in vm.principales | filter:{nombre:vm.usuario}:true">
+
+<div class="input-field col s12">
+    <button class="btn waves-effect waves-light col s12 materialize-red" type="submit" onclick="window.location='http://127.0.0.1:8080';">Salir</button>
+</div>
+
+<div ng-repeat="t in vm.principales | filter:{matricula:vm.usuario}:true">
     <div class="card blue-grey darken-4 white-text">
         <div class="card-content white-text card-small">
             <div class="row">

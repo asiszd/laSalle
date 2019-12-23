@@ -6,7 +6,7 @@ model {
 }
 
 json {
-    hal.links(principal)  f
+    hal.links(principal)
     id principal.id
     nombre principal.nombreC
     correo principal.correo

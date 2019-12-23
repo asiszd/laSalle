@@ -6,7 +6,7 @@ class UrlMappings {
 
         "/api/principales"(resources:"principal")
         "/api/mail"(controller: 'Principal', action: 'sendEmail')
-        "/api/principales/login"(controller: 'Principal', action: 'login')
+        "/api/principales/login"(controller: 'Principal', action: 'loginn')
 
 
         delete "/$controller/$id(.$format)?"(action:"delete")
