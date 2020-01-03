@@ -20,7 +20,7 @@ angular
 
 function PrincipalController(Principal, $http, $filter,$window) {
     var vm = this;
-    var todosGrailsServerUri = 'http://localhost:8080/principales';
+    var todosGrailsServerUri = 'http://127.0.0.1:8080/principales';
 
     vm.authenticated = false;
     vm.user = {};
@@ -59,30 +59,43 @@ function PrincipalController(Principal, $http, $filter,$window) {
         }]
     }];
     //vm.principales = Principal.list();
-    var baseURL = 'localhost:8080/';
+    var baseURL = 'http://localhost:8080/';
 
     vm.newPrincipal = new Principal();
 
     vm.login = function() {
-        vm.filteredItems = Principal.list();
-        var princi = $filter('filter')(vm.filteredItems, {"nombre":"asis"});
-
-            console.log(vm.filteredItems)
-            vm.usuario = vm.user.username;
-                //vm.filteredItems = $filter('filter')(vm.principales, {"nombre":"asis"}, true );
-                //console.log(vm.filteredItems);
-            console.log("-----------------------------------------------------------");
-            console.log(princi);
-
+        $http.post('/api/principales/login?usuario='+vm.user.username+'&pass='+vm.user.password).then(function(response) {
+            var respuesta = response.data.estado;
+            if (respuesta == 'true'){
+                vm.authenticated = true;
+                vm.principales = Principal.list();
+                vm.usuario = vm.user.username;
+            } else {
+                alert('USUARIO O CONTRASENA INCORRECTA');
+            }
+        });
     };
 
     vm.save = function() {
-        vm.newPrincipal.$save({}, function() {
-            var backup = vm.newPrincipal;
-            vm.principales.push(angular.copy(vm.newPrincipal));
-            vm.newPrincipal = new Principal();
-            $http.post('api/mail?correo='+backup.correo+'&matricula='+backup.matricula+'&pass='+backup.contra)
+        vm.newPrincipal.contra = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        vm.newPrincipal.semestre = 1;
+        $http.post('/api/principales/verUsuario?usuario='+vm.newPrincipal.matricula+'&correo='+vm.newPrincipal.correo).then(function(response) {
+            var respuesta = response.data.estado;
+            if (respuesta == 'true') {
+                vm.newPrincipal.$save({}, function () {
+                    var backup = vm.newPrincipal;
+                    vm.principales.push(angular.copy(vm.newPrincipal));
+                    vm.newPrincipal = new Principal();
+                    $http.post('api/mail?correo=' + backup.correo + '&matricula=' + backup.matricula + '&pass=' + backup.contra);
+                    $window.location.href = baseURL;
+                });
+            } else if (respuesta == "422"){
+                alert('La MATRICULA ya se encuentra en el sistema. Por favor ingrese una matricula diferente o inicie sesión con la matricula proporcionada');
+            }else if (respuesta == "423"){
+                alert('El CORREO ya se encuentra en el sistema');
+            }
         });
+        // VERIFICAR CON UN METODO EN PrincipalController SI EL USUARIO YA EXISTE EN LA BASE DE DATOS.
     };
 
     vm.delete = function(principal) {
@@ -93,8 +106,8 @@ function PrincipalController(Principal, $http, $filter,$window) {
     };
 
     vm.update = function(principal) {
-        console.log(principal);
         principal.$update();
+        $window.location.href = baseURL;
     };
 
     vm.toggleDisplay = function() {
@@ -103,14 +116,12 @@ function PrincipalController(Principal, $http, $filter,$window) {
 
     vm.getEspecialidades = function (selectedNivel) {
         var filtroEspe = $filter('filter')(vm.niveles, selectedNivel);
-        console.log(filtroEspe[0].especialidades)
         return filtroEspe[0].especialidades;
     }
 
     vm.addTodo = function(principal) {
         var todo = {name: "This is a new todo.", completed: false};
         $http.post(todosGrailsServerUri,todo);
-        console.log(principal);
     };
 
 }

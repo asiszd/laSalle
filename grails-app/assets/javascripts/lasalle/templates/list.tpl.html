@@ -1,21 +1,5 @@
-<!--<table>
-    <tbody>
-    <tr ng-repeat="t in vm.principales | filter:{nombre:vm.usuario}:true">
-        <td>
-            {{t.matricula}}
-        </td>
-        <td>
-            <input type="checkbox" ng-model="t.correo" ng-click="vm.update(t)" />
-        </td>
-        <td>
-            <button type="button" ng-click="vm.delete(t)">Delete</button>
-        </td>
-    </tr>
-    </tbody>
-</table>-->
-
 <div class="input-field col s12">
-    <button class="btn waves-effect waves-light col s12 materialize-red" type="submit" onclick="window.location='http://127.0.0.1:8080';">Salir</button>
+    <button class="btn waves-effect waves-light col s12 materialize-red" type="submit" onclick="window.location='http://localhost:8080';">Salir</button>
 </div>
 
 <div ng-repeat="t in vm.principales | filter:{matricula:vm.usuario}:true">
@@ -25,7 +9,7 @@
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id ="nombre" name="nombre" type="text" ng-value="t.nombre" ng-model="t.nombre">
+                    <input id ="nombre" name="nombre" type="text" ng-value="t.nombre" ng-model="t.nombreC">
                     <label class="active" for="nombre">Nombre</label>
                 </div>
             </div>
@@ -44,26 +28,22 @@
                 </div>
             </div>
 
-           <div class="row">
-                <div class="input-field col s12">
-                    <input disabled id ="nivAca" type="text" ng-model="t.nivel">
-                    <label class="active" for="nivAca">Nivel Academico</label>
-                </div>
-            </div>
-
-         <!--    <div class="row">
-                <label>Nivel Academico</label>
-                <select class="browser-default" ng-model="t.nivel" ng-options="x.text for x in vm.nivel"></select>
-                <input  type="hidden" ng-model="t.nivel" name="minivel" ng-value="t.nivel"/>
-            </div>-->
-
+            <!-- BOTONES DE SELECCION -->
             <div class="row">
-                <div class="input-field col s12">
-                    <input id ="especialidad" name="especialidad" type="text" ng-value="t.especialidad" ng-model="t.especialidad">
-                    <label class="active" for="especialidad">Especialidad</label>
-                </div>
+                <select ng-model="t.nivel" class="browser-default" required class="validate white-text">
+                    <option selected value="">Select</option>
+                    <option ng-repeat="nivel in vm.niveles" value="{{nivel.nivel}}">{{nivel.nivel}}</option>
+                </select>
             </div>
 
+            <div>
+                <select ng-model="t.especialidad" ng-show="t.nivel" class="browser-default">
+                    <option selected value="">Select</option>
+                    <option ng-repeat="branch in vm.getEspecialidades(t.nivel)" value="{{branch.name}}">{{ branch.name }}</option>
+                </select>
+            </div>
+            <!-- FINAL BOTONES DE SELECCION -->
+            <br>
             <div class="row">
                 <div class="input-field col s12">
                     <input id ="semestre" name="semestre" type="text" ng-value="t.semestre" ng-model="t.semestre" disabled>
